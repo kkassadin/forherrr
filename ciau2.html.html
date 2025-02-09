@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>La Mia Valentina</title>
+    <style>
+        body {
+            font-family:Arial, Helvetica, sans-serif;
+            text-align: center;
+            background-color: #ffe6e6;
+            color: #333;
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+        h1 {
+            font-size: 3em;
+            margin-top: 50px;
+            color: #ff3366;
+        }
+        .container {
+            margin-top: 100px;
+        }
+        p {
+            font-size: 1.5em;
+            color: #555;
+            margin-top: 20px;
+        }
+        .heart {
+            font-size: 3em;
+            color: red;
+        }
+        .btn {
+            background-color: #ff3366;
+            color: white;
+            padding: 15px 30px;
+            font-size: 1.2em;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 30px;
+            transition: all 0.3s ease;
+        }
+        .btn:hover {
+            background-color: #ff1a4d;
+        }
+        .btn:focus {
+            outline: none;
+        }
+        #yes-btn {
+            font-size: 1.5em;
+        }
+    </style>
+</head>
+<body>
+    <h1>Sei la mia Valentina?</h1>
+    <div class="container">
+        <p>La mia vita è più bella con te. Sei la persona che rende ogni giorno speciale.</p>
+        <p class="heart">❤️</p>
+        <p>Voglio passare il resto della mia vita con te.</p>
+
+        <button id="yes-btn" class="btn" onclick="handleYesClick()">Sì</button>
+        <button id="no-btn" class="btn" onclick="handleNoClick()">No</button>
+    </div>
+
+    <script>
+        var sizeIncrement = 3.0;  // Incremento della dimensione del pulsante "Sì"
+        var maxSize = 10000;  // Limite massimo della dimensione
+        var clickCount = 0;  // Contatore dei clic su "No"
+        var noTextOptions = [
+            "no",
+            "ancora no?",
+            "eddai",
+            "perche no?",
+            "ancora no...?",
+            "pensaci dai",
+            "ripensaci",
+            "pensaci di piu",
+             "pleaseeeeeeeeee",
+             "EDDAIAIAIA",
+             "DAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAI",
+             "E DI DI SI ",
+        ];  // Testi alternati per il pulsante "No"
+
+        // Funzione per gestire il click su "Sì"
+        function handleYesClick() {
+            var yesBtn = document.getElementById("yes-btn");
+
+            // Se il pulsante "Sì" è abbastanza grande, cambia il contenuto della pagina
+            if (yesBtn.offsetWidth >= window.innerWidth - 50 || yesBtn.offsetHeight >= window.innerHeight - 50) {
+                // Mostra un messaggio di ringraziamento
+                document.body.innerHTML = "<h1>Grazie di cuore, sei la mia Valentina! 💖</h1>";
+            }
+        }
+
+        // Funzione per gestire il click su "No"
+        function handleNoClick() {
+            var yesBtn = document.getElementById("yes-btn");
+            var noBtn = document.getElementById("no-btn");
+
+            // Aumenta la dimensione del pulsante "Sì" ogni volta che "No" viene cliccato
+            clickCount++;
+            var newSize = 1.5 + sizeIncrement * clickCount;
+            yesBtn.style.fontSize = newSize + "em";  // Aumenta progressivamente
+
+            // Se il pulsante "Sì" è diventato troppo grande, non aumentare più la sua dimensione
+            if (newSize >= maxSize) {
+                yesBtn.style.fontSize = maxSize + "em";  // Imposta la dimensione massima
+            }
+
+            // Cambia il testo del pulsante "No" a uno dei nuovi testi
+            var newTextIndex = clickCount % noTextOptions.length;  // Cambia il testo in base al contatore dei clic
+            noBtn.innerText = noTextOptions[newTextIndex];
+        }
+    </script>
+</body>
+</html>
